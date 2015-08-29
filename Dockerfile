@@ -16,8 +16,8 @@ RUN gdebi -n maven3_3.2.1-0~ppa1_all.deb
 RUN ln -s /usr/share/maven3/bin/mvn /usr/bin/maven
 RUN ln -s /usr/share/maven3/bin/mvn /usr/bin/mvn
 
-RUN debconf-set-selections <<< "postfix postfix/mailname string talos.digital.com"
-RUN debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+RUN bash -c 'debconf-set-selections <<< "postfix postfix/mailname string talos.digital.com"'
+RUN bash -c 'debconf-set-selections <<< "postfix postfix/main_mailer_type string \"Internet Site\""'
 RUN apt-get install -y postfix mailutils
 
 CMD ["/usr/bin/supervisord", "-n"]
